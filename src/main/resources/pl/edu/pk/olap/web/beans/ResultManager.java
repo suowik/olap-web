@@ -1,12 +1,15 @@
 package pl.edu.pk.olap.web.beans;
 
+import pl.edu.pk.olap.async.DataCrawler;
 import pl.edu.pk.olap.data.dao.ComputerDAO;
 import pl.edu.pk.olap.data.dao.ComputerDAOFactory;
 import pl.edu.pk.olap.data.dto.Computer;
 import pl.edu.pk.olap.data.dto.GroupingSetsResult;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -40,6 +43,11 @@ public class ResultManager implements Serializable {
         } else if(GROUPING_SETS.equals(type)){
             groupingSetsResults = computerDAO.groupingSets();
         }
+    }
+
+    public void crawl(ActionEvent event){
+        FacesContext.getCurrentInstance().addMessage(null,new FacesMessage("Rozpoczęto pobieranie danych"));
+        new DataCrawler().run();
     }
 
 

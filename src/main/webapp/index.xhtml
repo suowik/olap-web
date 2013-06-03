@@ -2,7 +2,8 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title></title>
@@ -15,6 +16,7 @@
 
 <h:body>
     <h:form id="mainForm">
+        <p:growl autoUpdate="true" id="growl" showDetail="true" sticky="true" />
         <div style="float: left; width: 25%">
             <p:menu>
                 <p:menuitem value="Cena, ram CUBE" actionListener="#{resultManager.executeQuery}"
@@ -28,6 +30,9 @@
                 <p:menuitem value="Grupowanie po cenie, sklepie i ilosci komputerow" actionListener="#{resultManager.executeQuery}"
                             update="mainForm" icon="ui-icon-disk">
                     <f:attribute name="query" value="grouping_sets"/>
+                </p:menuitem>
+                <p:menuitem value="Zasil hurtownie" actionListener="#{resultManager.crawl}"
+                            update="growl" icon="ui-icon-disk">
                 </p:menuitem>
             </p:menu>
         </div>
