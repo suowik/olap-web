@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title></title>
+    <style type="text/css">
+    .ui-widget {
+        font-size: 12px;
+    }
+    </style>
+</h:head>
+
+<h:body>
+    <h:form id="mainForm">
+        <div style="float: left; width: 25%">
+            <p:menu>
+                <p:menuitem value="Cena, ram CUBE" actionListener="#{resultManager.executeQuery}"
+                            update="mainForm" icon="ui-icon-disk">
+                    <f:attribute name="query" value="cube"/>
+                </p:menuitem>
+                <p:menuitem value="Cena, hdd ROLLUP" actionListener="#{resultManager.executeQuery}"
+                            update="mainForm" icon="ui-icon-disk">
+                    <f:attribute name="query" value="rollup"/>
+                </p:menuitem>
+                <p:menuitem value="Grupowanie po cenie, sklepie i ilosci komputerow" actionListener="#{resultManager.executeQuery}"
+                            update="mainForm" icon="ui-icon-disk">
+                    <f:attribute name="query" value="grouping_sets"/>
+                </p:menuitem>
+            </p:menu>
+        </div>
+        <p:panel style="float: right; width: 74%">
+            <p:dataTable value="#{resultManager.computers}" var="computer" paginator="true" rows="10" rendered="#{not resultManager.computers.isEmpty()}">
+                <p:column headerText="cena">
+                    #{computer.price}
+                </p:column>
+                <p:column headerText="procesor">
+                    #{computer.cpu}
+                </p:column>
+                <p:column headerText="suma">
+                    #{computer.sum}
+                </p:column>
+            </p:dataTable>
+
+            <p:dataTable value="#{resultManager.groupingSetsResults}" var="computer" paginator="true" rows="15" rendered="#{not resultManager.groupingSetsResults.isEmpty()}">
+                <p:column headerText="cena">
+                    #{computer.price}
+                </p:column>
+                <p:column headerText="ilosc">
+                    #{computer.count}
+                </p:column>
+                <p:column headerText="suma">
+                    #{computer.sum}
+                </p:column>
+                <p:column headerText="sklep">
+                    #{computer.source}
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+</h:body>
+</html>
